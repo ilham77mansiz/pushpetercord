@@ -1,4 +1,4 @@
-_get_ziplink () {
+__ziplink () {
     local regex
     regex='(https?)://github.com/.+/.+'
     if [[ $PANDA_USERBOT_REPO == "PANDA_USERBOT" ]]
@@ -20,7 +20,7 @@ _get_ziplink () {
     fi
 }
 
-_get_repolink () {
+__repolink () {
     local regex
     local rlink
     regex='(https?)://github.com/.+/.+'
@@ -38,7 +38,7 @@ _run_python_code() {
     python3${pVer%.*} -c "$1"
 }
 
-_run_pandapack_git() {
+_install_deploy_git() {
     $(_run_python_code 'from git import Repo
 import sys
 OFFICIAL_UPSTREAM_REPO = "https://github.com/ilhammansiz/DEPLOY"
@@ -50,8 +50,8 @@ repo.create_head(ACTIVE_BRANCH_NAME, origin.refs[ACTIVE_BRANCH_NAME])
 repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
 }
 
-_run_panda_git() {
-    local repolink=$(_get_repolink)
+_start_install_git() {
+    local repolink=$(__repolink)
     $(_run_python_code 'from git import Repo
 import sys
 OFFICIAL_UPSTREAM_REPO="'$repolink'"
@@ -68,16 +68,16 @@ _set_bot () {
     local zippath
     zippath="pandauserbot.zip"
     echo "  Downloading source code ..."
-    wget -q $(_get_ziplink) -O "$zippath"
+    wget -q $(__ziplink) -O "$zippath"
     echo "  Unpacking Data ..."
     PANDA_USERBOTPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
     unzip -qq "$zippath"
     echo "Done"
     echo "  Cleaning ..."
     rm -rf "$zippath"
-    _run_pandapack_git
+    _install_deploy_git
     cd $PANDA_USERBOTPATH
-    _run_panda_git
+    _start_install_git
     echo "    Starting PandaUserBot    "
     echo "
                         ((((((PANDA_USERBOT))))
