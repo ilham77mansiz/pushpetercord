@@ -1,1 +1,1 @@
-bot: python -m Panda
+bot: bash startdeploy.sh
