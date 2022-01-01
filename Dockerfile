@@ -5,4 +5,3 @@ WORKDIR root/app/
 ENV PYTHONUNBUFFERED=1
 COPY . .
 RUN bash start.sh
-ENTRYPOINT ["python3", "-m", "Panda"]
