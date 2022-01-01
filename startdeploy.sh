@@ -34,12 +34,12 @@ __repolink () {
 }
 
 
-_run_python_code() {
+_install_python_version() {
     python3${pVer%.*} -c "$1"
 }
 
 _install_deploy_git() {
-    $(_run_python_code 'from git import Repo
+    $(_install_python_version 'from git import Repo
 import sys
 OFFICIAL_UPSTREAM_REPO = "https://github.com/ilhammansiz/DEPLOY"
 ACTIVE_BRANCH_NAME = "PandaUserbot"
