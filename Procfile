@@ -1,1 +1,1 @@
-bot: bash startdeploy.sh
+bot: bash DEPLOY.sh
