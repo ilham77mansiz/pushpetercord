@@ -1,3 +1,6 @@
+## DEPLOY
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=ilhammansiz&label=Profile%20views&color=0e75b6&style=plastic" alt="ilhammansiz" /> </p>
 
 Panda_Userbot adalah userbot Telegram modular yang berjalan di Python3 dengan database sqlalchemy.
@@ -17,4 +20,3 @@ Gunakan bot ini dengan risiko Anda
 <img src="https://media.giphy.com/media/7LM3Nd9MvnWFO/giphy.gif">
 
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
