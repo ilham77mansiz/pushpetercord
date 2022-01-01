@@ -1,6 +1,6 @@
 # Panda - UserBot
-# Copyright (C) 2021 PandaX_Userbot
-# ilham mansiz
+# # Copyright (C) 2020-2021 by DevsExpo@Github, < https://github.com/DevsExpo >.
+# recode by ilham mansiz
 # This file is a part of < https://github.com/ilhammansiz/PandaX_Userbot/ >
 
 nowtime=$(date)
