@@ -3,9 +3,6 @@
 # ilham mansiz
 # This file is a part of < https://github.com/ilhammansiz/PandaX_Userbot/ >
 
-
-
-
 nowtime=$(date)
 echo "
 PandaUserBot
