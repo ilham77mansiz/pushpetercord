@@ -80,8 +80,8 @@ _install_pandauserbot () {
     _start_install_git
     echo "    Starting PandaUserBot    "
     echo "
-     ꧁༺ Panda Userbot ༻꧂
-       Menginstal........
+           ꧁༺ Panda Userbot ༻꧂
+            Menginstal........
     "
     python3 -m Panda
 }
