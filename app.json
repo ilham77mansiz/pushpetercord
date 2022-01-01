@@ -26,6 +26,21 @@
       "value": "",
       "required": true
     },
+    "BOT_TOKEN": {
+      "description": "Token bot ambil di @Botfather",
+      "value": "",
+      "required": true
+    },
+    "BOT_USERNAME": {
+      "description": "Username bot di @Botfather",
+      "value": "",
+      "required": true
+    },
+    "PRIVATE_GROUP_BOT_API_ID": {
+      "description": "Masukkan id grup private",
+      "value": "",
+      "required": true
+    },
     "HEROKU_API": {
       "description": "Required for updating the bot and other stuff get it from https://dashboard.heroku.com/account",
       "value": "",
