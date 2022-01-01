@@ -64,7 +64,7 @@ repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
 }
 
 
-_set_bot () {
+_install_pandauserbot () {
     local zippath
     zippath="pandauserbot.zip"
     echo "  Downloading source code ..."
@@ -87,4 +87,4 @@ _set_bot () {
     python3 -m Panda
 }
 
-_set_bot
+_install_pandauserbot
