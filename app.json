@@ -37,6 +37,12 @@
       "required": false
     }
   },
+  "addons": [{
+    "plan": "heroku-postgresql",
+    "options": {
+      "version": "12"
+    }
+  }],
     "formation": {
     "bot": {
       "quantity": 1,
