@@ -1,11 +1,12 @@
 # Panda - UserBot
-# # Copyright (C) 2020-2021 by DevsExpo@Github, < https://github.com/DevsExpo >.
-# recode by ilham mansiz
-# This file is a part of < https://github.com/ilhammansiz/PandaX_Userbot/ >
+FROM  ilhammansiz17/ilham-mansiez-petercord:Petercord-Userbot
 
-FROM python:3.9
-WORKDIR /app
-ENV PYTHONUNBUFFERED=1
-COPY . .
-RUN bash INSTALL.sh
-ENTRYPOINT ["bash", "DEPLOY.sh"]
+RUN git clone -b main https://github.com/PandaUserbot/Dev /root/Panda
+RUN mkdir /root/Panda/.bin
+RUN pip install --upgrade pip setuptools
+WORKDIR /root/Panda
+
+#Install python requirements
+RUN pip3 install -r https://raw.githubusercontent.com/PandaUserbot/Dev-/main/requirements.txt
+
+CMD ["bash", "DEPLOY.sh"]
