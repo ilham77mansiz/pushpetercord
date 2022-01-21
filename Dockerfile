@@ -7,6 +7,6 @@ RUN pip install --upgrade pip setuptools
 WORKDIR /root/Panda
 
 #Install python requirements
-RUN pip3 install -r https://raw.githubusercontent.com/PandaUserbot/Dev-/main/requirements.txt
+RUN pip3 install -r https://raw.githubusercontent.com/PandaUserbot/Dev/main/requirements.txt
 
 CMD ["bash", "DEPLOY.sh"]
