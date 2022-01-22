@@ -44,7 +44,6 @@ _start_all () {
     installrun
     install_chrome
     pip3 install –upgrade pip
-    pip3 install av --no-binary av
     pip3 install --no-cache-dir -r requirements.txt
     terakhir
 }
