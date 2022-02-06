@@ -4,9 +4,9 @@ __ziplink () {
     if [[ $PANDA_USERBOT_REPO == "PANDA_USERBOT" ]]
     then
         echo "aHR0cHM6Ly9naXRodWIuY29tL2lsaGFtbWFuc2l6L1BhbmRhWF9Vc2VyYm90L2FyY2hpdmUvUGFuZGFVc2VyYm90LnppcA==" | base64 -d
-    elif [[ $PANDA_USERBOT_REPO == "PANDA_USERBOT" ]]
+    elif [[ $PANDA_USERBOT_REPO == "BUKAN_USERBOT" ]]
     then
-        echo "aHR0cHM6Ly9naXRodWIuY29tL2lsaGFtbWFuc2l6L1BhbmRhWF9Vc2VyYm90L2FyY2hpdmUvUGFuZGFVc2VyYm90LnppcA==" | base64 -d
+        echo "aHR0cHM6Ly9naXRodWIuY29tL0FmdGFoQmFnYXMvUGFuZGFYX1VzZXJib3QvYXJjaGl2ZS9QYW5kYVVzZXJib3Quemlw" | base64 -d
     elif [[ $PANDA_USERBOT_REPO =~ $regex ]]
     then
         if [[ $PANDA_USERBOT_REPO_BRANCH ]]
@@ -26,12 +26,20 @@ __repolink () {
     regex='(https?)://github.com/.+/.+'
     if [[ $UPSTREAM_REPO == "PANDA_USERBOT" ]]
     then
+        rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL2lsaGFtbWFuc2l6L1BhbmRhWF9Vc2VyYm90" | base64 -d`
+    elif [[ $UPSTREAM_REPO == "BUKAN_USERBOT" ]]
+    then
+        rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL0FmdGFoQmFnYXMvUGFuZGFYX1VzZXJib3Q=" | base64 -d`
+    elif [[ $UPSTREAM_REPO =~ $regex ]]
+    then
         rlink=`echo "${UPSTREAM_REPO}"`
     else
         rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL2lsaGFtbWFuc2l6L1BhbmRhWF9Vc2VyYm90" | base64 -d`
     fi
     echo "$rlink"
 }
+
+
 
 
 _install_python_version() {
