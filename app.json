@@ -52,17 +52,14 @@
       "required": true
     }
   },
-    "addons": [{
+      "addons": [{
     "plan": "heroku-postgresql",
     "options": {
       "version": "12"
     }
   }],
-  "buildpacks": [{
-    "url": "heroku/python"
-  }],
     "formation": {
-    "worker": {
+    "bot": {
       "quantity": 1,
       "size": "free"
     }
