@@ -1,1 +1,1 @@
-worker: bash DEPLOY.sh
+bot: bash DEPLOY.sh
