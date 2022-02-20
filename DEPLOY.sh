@@ -1,97 +1,93 @@
-__ziplink () {
+#!/bin/bash
+
+
+# error precaution.
+set -e
+
+WORK_DIR="userbot"
+mkdir -p $WORK_DIR
+
+disp () {
+    echo "-----> $*"
+}
+
+indent () {
+    sed -u 's/^/       /'
+}
+
+_done () {
+    echo -e "Done\n" | indent
+}
+
+_displaylogo () {
+    echo '
+===========================================
+ (((((PETERCORD)))))➡➡➡➡(((((IlhamMansiez))))
+ ⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙
+ ⚙⚙     ⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙     ⚙⚙
+ ⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙
+               ⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙
+          ⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙
+ ⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙⚙
+===========================================
+|            VERSION  v0.1.0                 |
+|    By: @diemmmmmmmmmm and Ilham Mansiez    |
+|           (C) 2021 - PetercordPlugin       |
+===========================================
+'
+}
+
+get_branch () {
+    local branch
+    if [[ $PREF_BRANCH ]]
+    then
+        branch=$(echo $PREF_BRANCH | xargs)
+    else
+        branch=petercord
+    fi
+    echo "/archive/refs/heads/$branch.zip"
+}
+
+get_ziplink () {
     local regex
     regex='(https?)://github.com/.+/.+'
-    if [[ $PANDA_USERBOT_REPO == "PANDA_USERBOT" ]]
-    then
-        echo "aHR0cHM6Ly9naXRodWIuY29tL2lsaGFtbWFuc2l6L1BhbmRhWF9Vc2VyYm90L2FyY2hpdmUvUGFuZGFVc2VyYm90LnppcA==" | base64 -d
-    elif [[ $PANDA_USERBOT_REPO == "BUKAN_USERBOT" ]]
-    then
-        echo "aHR0cHM6Ly9naXRodWIuY29tL0FmdGFoQmFnYXMvUGFuZGFYX1VzZXJib3QvYXJjaGl2ZS9QYW5kYVVzZXJib3Quemlw" | base64 -d
-    elif [[ $PANDA_USERBOT_REPO =~ $regex ]]
-    then
-        if [[ $PANDA_USERBOT_REPO_BRANCH ]]
-        then
-            echo "${PANDA_USERBOT_REPO}/archive/${PANDA_USERBOT_REPO_BRANCH}.zip"
-        else
-            echo "${PANDA_USERBOT_REPO}/archive/PandaUserbot.zip"
-        fi
+    if [[ $UPSTREAM_REPO =~ $regex ]]
+    then 
+        echo "${UPSTREAM_REPO}$(get_branch)"
     else
-        echo "aHR0cHM6Ly9naXRodWIuY29tL2lsaGFtbWFuc2l6L1BhbmRhWF9Vc2VyYm90L2FyY2hpdmUvUGFuZGFVc2VyYm90LnppcA==" | base64 -d
+        echo "$(echo "aHR0cHM6Ly9naXRodWIuY29tL0lsaGFtTWFuc2llei9QZXRlcmNvcmQ" | base64 -d)$(get_branch)"
     fi
 }
 
-__repolink () {
-    local regex
-    local rlink
-    regex='(https?)://github.com/.+/.+'
-    if [[ $UPSTREAM_REPO == "PANDA_USERBOT" ]]
-    then
-        rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL2lsaGFtbWFuc2l6L1BhbmRhWF9Vc2VyYm90" | base64 -d`
-    elif [[ $UPSTREAM_REPO == "BUKAN_USERBOT" ]]
-    then
-        rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL0FmdGFoQmFnYXMvUGFuZGFYX1VzZXJib3Q=" | base64 -d`
-    elif [[ $UPSTREAM_REPO =~ $regex ]]
-    then
-        rlink=`echo "${UPSTREAM_REPO}"`
-    else
-        rlink=`echo "aHR0cHM6Ly9naXRodWIuY29tL2lsaGFtbWFuc2l6L1BhbmRhWF9Vc2VyYm90" | base64 -d`
-    fi
-    echo "$rlink"
-}
-
-
-
-
-_install_python_version() {
-    python3${pVer%.*} -c "$1"
-}
-
-_install_deploy_git() {
-    $(_install_python_version 'from git import Repo
-import sys
-OFFICIAL_UPSTREAM_REPO = "https://github.com/PandaUserbot/Dev"
-ACTIVE_BRANCH_NAME = "main"
-repo = Repo.init()
-origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
-origin.fetch()
-repo.create_head(ACTIVE_BRANCH_NAME, origin.refs[ACTIVE_BRANCH_NAME])
-repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
-}
-
-_start_install_git() {
-    local repolink=$(__repolink)
-    $(_run_python_code 'from git import Repo
-import sys
-OFFICIAL_UPSTREAM_REPO="'$repolink'"
-ACTIVE_BRANCH_NAME = "'$UPSTREAM_REPO_BRANCH'" or "PandaUserbot"
-repo = Repo.init()
-origin = repo.create_remote("temponame", OFFICIAL_UPSTREAM_REPO)
-origin.fetch()
-repo.create_head(ACTIVE_BRANCH_NAME, origin.refs[ACTIVE_BRANCH_NAME])
-repo.heads[ACTIVE_BRANCH_NAME].checkout(True) ')
-}
-
-
-_install_pandauserbot () {
+_setup_repo () {
     local zippath
-    zippath="pandauserbot.zip"
-    echo "  Downloading source code ..."
-    wget -q $(__ziplink) -O "$zippath"
-    echo "  Unpacking Data ..."
-    PANDA_USERBOTPATH=$(zipinfo -1 "$zippath" | grep -v "/.");
-    unzip -qq "$zippath"
-    echo "Done"
-    echo "  Cleaning ..."
+    zippath="$WORK_DIR/temp.zip"
+    disp "Fetching Update from Upstream Repo"
+    wget -qq $(get_ziplink) -O "$zippath"
+    _done
+    disp "Unpacking Data"
+    unzip -qq "$zippath" -d "$WORK_DIR"
+    _done
+    disp "Cleaning"
     rm -rf "$zippath"
-    _install_deploy_git
-    cd $PANDA_USERBOTPATH
-    _start_install_git
-    echo "    Starting PandaUserBot    "
-    echo "
-           ꧁༺ Panda Userbot ༻꧂
-            Menginstal........
-    "
-    python3 -m Panda
+    _done
 }
 
-_install_pandauserbot
+_startbot () {
+    local bot_dir
+    bot_dir=$(cd $WORK_DIR && ls) && mv "$WORK_DIR/$bot_dir" "Petercord"
+    rm -rf $WORK_DIR
+    cd "Petercord"
+    git init > /dev/null 2>&1
+    echo -e ">><< --- >><<  Starting [X]  >><< --- >><<\n" | indent
+    bash run
+}
+
+begin_x () {
+    _displaylogo
+    sleep 5
+    _setup_repo
+    _startbot
+}
+
+begin_x
