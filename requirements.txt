@@ -38,7 +38,7 @@ wikipedia
 git+https://github.com/ytdl-org/youtube-dl
 git+https://github.com/Nekos-life/Async-nekos.life-wrapper
 ruamel.yaml
-ujson>=4.0.1
+ujson
 youtube-search-python
 git+https://github.com/aftahbagas/google-images-download.git
 feedparser
