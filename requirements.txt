@@ -45,3 +45,6 @@ wikipedia
 youtube_dl>=2021.1.8
 youtube-search-python==1.4.9
 ujson
+git+https://github.com/aftahbagas/google-images-download.git
+ruamel.yaml==0.16.13
+git+https://github.com/Nekos-life/Async-nekos.life-wrapper
