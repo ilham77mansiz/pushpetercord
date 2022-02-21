@@ -77,3 +77,4 @@ psycopg2-binary
 pyyaml==5.4.1
 countryinfo
 emoji-country-flag
+pymongo[srv]
