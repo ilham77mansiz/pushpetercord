@@ -45,7 +45,10 @@ get_branch () {
 get_ziplink () {
     local regex
     regex='(https?)://github.com/.+/.+'
-    if [[ $UPSTREAM_REPO =~ $regex ]]
+    if [[ $UPSTREAM_REPO == "AlphaZ" ]]
+    then
+        echo "$(echo "aHR0cHM6Ly9naXRodWIuY29tL0FmdGFoQmFnYXMvQWxwaGE=" | base64 -d)$(get_branch)"
+    elif [[ $UPSTREAM_REPO =~ $regex ]]
     then 
         echo "${UPSTREAM_REPO}$(get_branch)"
     else
